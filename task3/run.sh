@@ -1,0 +1,2 @@
+#!/bin/bash
+hadoop jar /opt/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/hadoop-streaming-2.7.3.jar -D mapreduce.job.output.key.comparator.class=org.apache.hadoop.mapreduce.lib.partition.KeyFieldBasedComparator -D mapred.reduce.tasks=1 -D stream.map.output.field.separator=" " -D mapreduce.map.output.key.field.separator=" " -input /data/assignments/ex2/part2/stackLarge.txt -output /user/s1682581/assignment2/task3 -mapper mapper.py -file ~/exc_asg2/task3/mapper.py -reducer reducer.py -file ~/exc_asg2/task3/reducer.py

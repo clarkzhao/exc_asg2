@@ -1,0 +1,33 @@
+#!/usr/bin/python
+
+import sys
+import collections
+#A dictionary to store the information like {(d2.txt,1), ... , (d5.txt,2)}
+    
+dic = {}
+pre_file_name = ""
+value_total = 0
+pre_word = ""
+for line in sys.stdin:
+    line = line.strip()
+    file_name, word, value = line.split()
+    value = int(value)
+    if pre_word == word:
+        if pre_file_name == file_name:
+            value_total += value
+        else:
+            dic[pre_file_name] = value_total
+            value_total = value
+            pre_file_name = file_name
+    else:
+        if pre_word:
+            dic[pre_file_name] = value_total
+            print ("{0}: {1} : {2}".format(pre_word, len(dic), dic))
+            dic = {}
+        value_total = value
+        pre_file_name = file_name
+        pre_word = word
+#last key/value pair
+if pre_word == word:
+    dic[pre_file_name] = value_total
+    print ("{0}: {1} : {2}".format(pre_word, len(dic), dic))
